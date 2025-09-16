@@ -3,13 +3,15 @@ import Navbar from "./components/Navbar";
 import Status from "./pages/Status";
 import UploadDocs from "./pages/UploadDocs";
 import Settings from "./pages/Settings";
+import { AppProvider } from "./context/AppContext";
 
 function App() {
   return (
+    <AppProvider>
     <Router>
       <div>
         <Navbar />
-        
+
         <Routes>
           <Route path="/" element={<Status />} />
           <Route path="/upload" element={<UploadDocs />} />
@@ -17,6 +19,7 @@ function App() {
         </Routes>
       </div>
     </Router>
+    </AppProvider>
   );
 }
 
