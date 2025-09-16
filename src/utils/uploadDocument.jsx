@@ -1,7 +1,6 @@
 import { getHeaders } from "./getHeaders";
-import {toast} from "react-toastify";
 
-export const uploadDocument = async (file, name, setDocumentIds, setErrors) => {
+export const uploadDocument = async (file, name, setDocumentIds, setErrors,onSuccess) => {
   const myHeaders = getHeaders();
 
   const formdata = new FormData();
@@ -24,7 +23,7 @@ export const uploadDocument = async (file, name, setDocumentIds, setErrors) => {
     console.log(`updated document ID: ${data.id}`);
     setErrors([]);  // Clear errors on success
     setDocumentIds(prev => [...prev, data.id]);
-    toast.success(`Document uploaded successfully! ID: ${data.id}`);
+    onSuccess(data.id)
   } catch (error) {
     console.error("An error occurred:", error);
     setErrors([`An error occurred: ${error.message}`]);
