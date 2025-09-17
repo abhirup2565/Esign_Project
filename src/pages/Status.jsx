@@ -1,41 +1,43 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useAppContext } from "../context/AppContext";
-import refreshSignature from "../utils/refreshSignature";
+import { handleRefresh} from "../utils/handleRefresh";
 import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import handleDownload from "../utils/handleDownload";
 
 const Status = () => {
   const { signatures, setSignatures } = useAppContext();
   const [errors, setErrors] = useState([]);
 
-  const handleRefresh = (signatureId) => {
-    // Placeholder for refresh logic
-    refreshSignature(signatureId, setErrors, (data) => {
-    setSignatures(prev => prev.map(sig =>
-    sig.signatureId === data.id ? {
-      ...sig,
-      signers: data.signers.map(signer => ({
-        signatureUrl: signer.url,
-        status: signer.status,
-        name: signer.displayName
-      }))
-    } : sig
-    ));
-    toast.success("Signature data refreshed!");
-    console.log("Refresh clicked for signature ID:", signatureId);
-    })
-    // you can fetch updated data and setSignatures here if needed
-  };
+useEffect(() => {
+    signatures.forEach(signatureRecord => {
+      const isAlreadyPolling = signatureRecord.polling;
+      const isComplete = signatureRecord.signers.every(signer => signer.status === "signed");
+
+      if (!isAlreadyPolling && !isComplete) {
+        // Mark the signature as polling to avoid multiple triggers
+        setSignatures(prev =>
+          prev.map(sig =>
+            sig.signatureId === signatureRecord.signatureId
+              ? { ...sig, polling: true }
+              : sig
+          )
+        );
+
+        handleRefresh(signatureRecord.signatureId, setSignatures, setErrors);
+      }
+    });
+  }, [signatures]);
 
   return (
     <div style={{ padding: "20px" }}>
       <h2>Status Page</h2>
-    {errors.length > 0 && (
-              <div style={{ marginTop: "20px", color: "red" }}>
-                <h4>Error:</h4>
-                <p>{errors[0]}</p>
-              </div>
-            )}
+      {errors.length > 0 && (
+        <div style={{ marginTop: "20px", color: "red" }}>
+          <h4>Error:</h4>
+          <p>{errors[0]}</p>
+        </div>
+      )}
       <table border="1" cellPadding="8" cellSpacing="0" style={{ width: "100%", borderCollapse: "collapse" }}>
         <thead>
           <tr>
@@ -52,10 +54,13 @@ const Status = () => {
               <td colSpan="5" style={{ textAlign: "center" }}>No signatures available</td>
             </tr>
           ) : (
-            signatures.map((signatureRecord) =>
-              signatureRecord.signers.map((signer, index) => (
+            signatures.map((signatureRecord) => {
+              const signerCount = signatureRecord.signers.length;
+              return signatureRecord.signers.map((signer, index) => (
                 <tr key={`${signatureRecord.signatureId}-${index}`}>
-                  <td>{signatureRecord.documentId}</td>
+                  {index === 0 && (
+                    <td rowSpan={signerCount}>{signatureRecord.documentId}</td>
+                  )}
                   <td>{signer.name}</td>
                   <td>{signer.status}</td>
                   <td>
@@ -63,14 +68,19 @@ const Status = () => {
                       Link to Sign
                     </a>
                   </td>
-                  <td>
-                    <button onClick={() => handleRefresh(signatureRecord.signatureId)}>
-                      Refresh
-                    </button>
-                  </td>
+                  {index === 0 && (
+                    <td rowSpan={signerCount}>
+                      {signatureRecord.complete && (
+                        <button onClick={() => handleDownload(signatureRecord.signatureId,setErrors,toast)}>
+                          Download
+                        </button>
+                      )}
+                    </td>
+                  )}
+
                 </tr>
-              ))
-            )
+              ));
+            })
           )}
         </tbody>
       </table>
