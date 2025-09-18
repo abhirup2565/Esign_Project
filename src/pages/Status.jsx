@@ -4,6 +4,7 @@ import { handleRefresh} from "../utils/handleRefresh";
 import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import handleDownload from "../utils/handleDownload";
+import StatusIndicator from "../components/StatusIndicator";
 
 const Status = () => {
   const { signatures, setSignatures } = useAppContext();
@@ -30,7 +31,7 @@ useEffect(() => {
   }, [signatures]);
 
   return (
-    <div style={{ padding: "20px" }}>
+    <div style={{ padding: "20px", width:"100%"}}>
       <h2>Status Page</h2>
       {errors.length > 0 && (
         <div style={{ marginTop: "20px", color: "red" }}>
@@ -38,7 +39,16 @@ useEffect(() => {
           <p>{errors[0]}</p>
         </div>
       )}
-      <table border="1" cellPadding="8" cellSpacing="0" style={{ width: "100%", borderCollapse: "collapse" }}>
+      <StatusIndicator signatures={signatures}/>
+      {signatures.length>0?(<StatusTable signatures={signatures} setErrors={setErrors}/>):(("empty"))}
+      <ToastContainer />
+    </div>
+  );
+};
+
+const StatusTable = ({ signatures, setErrors })=>{
+  return(
+    <table border="1" cellPadding="8" cellSpacing="0" style={{ width: "100%", borderCollapse: "collapse" }}>
         <thead>
           <tr>
             <th>Document ID</th>
@@ -84,9 +94,7 @@ useEffect(() => {
           )}
         </tbody>
       </table>
-      <ToastContainer />
-    </div>
-  );
-};
+  )
+}
 
 export default Status;
