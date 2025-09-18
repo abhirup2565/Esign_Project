@@ -1,12 +1,12 @@
 import { getHeaders } from "./getHeaders";
 import { users } from "../constants/users";
 
-const createSignatureRequest = async (documentId, selectedUserIds, setErrors, onSuccess) => {
+const createSignatureRequest = async (documentId, selectedUsers, setErrors, onSuccess) => {
   const myHeaders = getHeaders();
   myHeaders.append("Content-Type", "application/json");
 
-  const signers = selectedUserIds.map((id) => {
-    const user = users.find(u => u.identifier === id);
+  const signers = selectedUsers.map(({ identifier }) => {
+    const user = users.find(u => u.identifier === identifier);
     return {
       identifier: user.identifier,
       displayName: user.displayName,

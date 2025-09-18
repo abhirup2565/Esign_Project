@@ -1,10 +1,10 @@
 import { users } from "../constants/users";
 import CreateSignatureButton from "./CreateSignatureButton";
+import "../styles/UploadDocs.css"
 
 const StepContent = ({
   currentStep,
   setCurrentStep,
-  file,
   name,
   setFile,
   setName,
@@ -20,9 +20,9 @@ const StepContent = ({
     switch (currentStep) {
       case 1:
         return (
-          <div>
+          <div className="step-content">
             <form onSubmit={handleUploadSubmit}>
-              <div style={{ marginBottom: "10px" }}>
+              <div>
                 <label>Document Name:</label>
                 <input
                   type="text"
@@ -33,7 +33,7 @@ const StepContent = ({
                 />
               </div>
 
-              <div style={{ marginBottom: "10px" }}>
+              <div>
                 <label>Choose File:</label>
                 <input
                   type="file"
@@ -42,10 +42,10 @@ const StepContent = ({
                   required
                 />
               </div>
-
-              <button type="submit" style={{ padding: "10px 20px" }}>
-                Upload
-              </button>
+              <div style={{display:"flex"}}>
+                <button type="submit">Upload</button>
+              </div>
+              
             </form>
 
             {errors.length > 0 && (
@@ -59,56 +59,79 @@ const StepContent = ({
 
       case 2:
         return (
-           <div>
-      <p><strong>Uploaded Document ID:</strong> {uploadedDocId}</p>
-      <h4>Select Users to Send Signature Request:</h4>
-      <ul style={{ listStyle: "none", paddingLeft: 0 }}>
-        {users.map((user) => {
-          return(<li key={user.identifier} style={{ marginBottom: "8px" }}>
-            <label>
+          <div className="step-content">
+  <p><strong>Uploaded Document ID:</strong> {uploadedDocId}</p>
+  <div className="step2-flex-container">
+    {/* Selected Users */}
+    <div className="selected-users">
+      {errors.length > 0 && (
+    <div className="error-message">
+      <h4>Error:</h4>
+      <p>{errors[0]}</p>
+    </div>
+  )}
+      <strong>Selected Users:</strong>
+      <div className="selected-users-list">
+        {selectedUsers.map((user) => (
+          <span key={user.identifier} className="selected-user-item">
+            {user.name}
+          </span>
+        ))}
+      </div>
+    </div>
+
+    {/* Scrollable Users List */}
+    <div>
+    <strong>Select Users to Send Signature Request:</strong>
+    <div className="users-list-container">
+      <ul className="users-list">
+        {users.map((user) => (
+          <li key={user.identifier} className="user-item">
+            <label className="user-label">
               <input
                 type="checkbox"
                 value={user.identifier}
-                checked={selectedUsers.includes(user.identifier)}
+                checked={selectedUsers.some(u => u.identifier === user.identifier)}
                 onChange={(e) => {
                   if (e.target.checked) {
-                    setSelectedUsers((prev) => [...prev, user.identifier]);
+                    setSelectedUsers((prev) => [
+                      ...prev,
+                      { identifier: user.identifier, name: user.displayName }
+                    ]);
                   } else {
                     setSelectedUsers((prev) =>
-                      prev.filter((id) => id !== user.identifier)
+                      prev.filter((u) => u.identifier !== user.identifier)
                     );
                   }
                 }}
               />
-              {user.displayName} ({user.birthYear})
+              <span className="user-name">{user.displayName} ({user.birthYear})</span>
             </label>
-          </li>)
-        })}
+          </li>
+        ))}
       </ul>
-
-      {/* Button to create signatures */}
-      <CreateSignatureButton
-        uploadedDocId={uploadedDocId}
-        selectedUsers={selectedUsers}
-        setErrors={setErrors}
-        setCurrentStep={setCurrentStep}
-      />
-
-      {errors.length > 0 && (
-              <div style={{ marginTop: "20px", color: "red" }}>
-                <h4>Error:</h4>
-                <p>{errors[0]}</p>
-              </div>
-            )}
     </div>
+    </div>
+  </div>
+
+  {/* Button to create signatures */}
+  <CreateSignatureButton
+    uploadedDocId={uploadedDocId}
+    selectedUsers={selectedUsers}
+    setErrors={setErrors}
+    setCurrentStep={setCurrentStep}
+  />
+</div>
+
         );
     
     case 3:
     return (
-        <div>
-        <h3>Step 3: Status Information Available</h3>
-        <p>Your document and signature information is now available in the Status page.</p>
-        </div>)
+      <div className="step-content step3">
+      <h3>Step 3: Status Information Available</h3>
+      <p>Your document and signature information is now available in the Status page.</p>
+    </div>
+    )
 
       default:
         return <p>Invalid step</p>;

@@ -5,6 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { uploadDocument } from "../utils/uploadDocument";
 import StepContent from "../components/StepContent";
 import Stepper from "../components/Stepper";
+import "../styles/UploadDocs.css"
 
 function UploadDocs() {
   const { documentIds, setDocumentIds } = useAppContext();
@@ -29,13 +30,12 @@ function UploadDocs() {
   };
 
   return (
-    <div style={{ maxWidth: "400px", margin: "auto", padding: "20px" }}>
-    <h2>Upload Document and Create Signature</h2>
-     <Stepper currentStep={currentStep}/>
+    <div className="uploadDocs-container">
+    <h2 className="uploadDocs-heading">Upload Document and Create Signature</h2>
+     <Stepper className="stepper-container" currentStep={currentStep}/>
     <StepContent
         currentStep={currentStep}
         setCurrentStep={setCurrentStep}
-        file={file}
         name={name}
         setFile={setFile}
         setName={setName}
