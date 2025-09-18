@@ -11,7 +11,7 @@ function Settings() {
   const [productInstanceId, setProductInstanceId] = useState("");
 
   // Load saved settings from localStorage on component mount
-  useEffect(() => {
+    useEffect(() => {
     const savedClientId = localStorage.getItem("x-client-id") || "";
     const savedClientSecret = localStorage.getItem("x-client-secret") || "";
     const savedProductInstanceId = localStorage.getItem("x-product-instance-id") || "";
@@ -36,23 +36,23 @@ function Settings() {
 
   return (
     <div className="settings-page">
-    <div className="settings-card">
-      <h2 className="settings-heading">Settings</h2>
+      <div className="settings-card">
+        <h2 className="settings-heading">Settings</h2>
 
-    {/* Note */}
-    <div className="settings-note">
-    <strong>Note:</strong> It is <span className="highlight">not recommended</span> to store sensitive data such as client secrets in localStorage for security reasons. This is done here only for demonstration and assignment purposes.
-    </div>
+      {/* Note */}
+      <div className="settings-note">
+        <strong>Note:</strong> It is <span className="highlight">not recommended</span> to store sensitive data such as client secrets in localStorage for security reasons. This is done here only for demonstration and assignment purposes.
+      </div>
 
-      <form className="settings-form" onSubmit={handleSubmit}>
-        <SettingsInput label="X-Client-ID" value={clientId} onChange={setClientId}/>
-        <SettingsInput label="X-Client-Secret" value={clientSecret} onChange={setClientSecret}/>
-        <SettingsInput label="X-Product-Instance-ID" value={productInstanceId} onChange={setProductInstanceId}/>
-        <button className="settings-btn" type="submit">Update</button>
-      </form>
+        <form className="settings-form" onSubmit={handleSubmit}>
+          <SettingsInput label="X-Client-ID" value={clientId} onChange={setClientId}/>
+          <SettingsInput label="X-Client-Secret" value={clientSecret} onChange={setClientSecret}/>
+          <SettingsInput label="X-Product-Instance-ID" value={productInstanceId} onChange={setProductInstanceId}/>
+          <button className="settings-btn" type="submit">Update</button>
+        </form>
 
-      <ToastContainer position="top-right" autoClose={2000}/>
-    </div>
+        <ToastContainer position="top-right" autoClose={2000}/>
+      </div>
     </div>
   );
 }

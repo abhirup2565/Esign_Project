@@ -1,6 +1,6 @@
 import { getHeaders } from "./getHeaders";
 
-export const uploadDocument = async (file, name, setDocumentIds, setErrors,onSuccess) => {
+export const uploadDocument = async (file, name, setErrors,onSuccess) => {
   const myHeaders = getHeaders();
 
   const formdata = new FormData();
@@ -22,7 +22,6 @@ export const uploadDocument = async (file, name, setDocumentIds, setErrors,onSuc
     const data = await resp.json();
     console.log(`updated document ID: ${data.id}`);
     setErrors([]);  // Clear errors on success
-    setDocumentIds(prev => [...prev, data.id]);
     onSuccess(data.id)
   } catch (error) {
     console.error("An error occurred:", error);

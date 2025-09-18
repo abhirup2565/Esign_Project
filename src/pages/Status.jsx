@@ -8,6 +8,7 @@ import StatusIndicator from "../components/StatusIndicator";
 import { FileText } from "lucide-react";
 import { FaDownload, FaLink } from "react-icons/fa";
 import "../styles/Status.css"
+import Error from "../components/Error";
 
 const Status = () => {
   const { signatures, setSignatures } = useAppContext();
@@ -36,12 +37,7 @@ useEffect(() => {
   return (
     <div className="status-page">
       <h2 className="status-heading">Status Page</h2>
-      {errors.length > 0 && (
-        <div style={{ marginTop: "20px", color: "red" }}>
-          <h4>Error:</h4>
-          <p>{errors[0]}</p>
-        </div>
-      )}
+      <Error errors={errors}/>
       <StatusIndicator signatures={signatures}/>
       {signatures.length>0?(<StatusTable signatures={signatures} setErrors={setErrors}/>):<EmptyTable/>}
       <ToastContainer />

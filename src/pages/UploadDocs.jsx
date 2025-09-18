@@ -8,7 +8,6 @@ import Stepper from "../components/Stepper";
 import "../styles/UploadDocs.css"
 
 function UploadDocs() {
-  const { documentIds, setDocumentIds } = useAppContext();
   const [file, setFile] = useState(null);
   const [name, setName] = useState("");
   const [errors, setErrors] = useState([]);
@@ -22,7 +21,7 @@ function UploadDocs() {
       setErrors(["Please provide both file and name."]);
       return;
     }
-    uploadDocument(file, name, setDocumentIds, setErrors, (docId) => {
+    uploadDocument(file, name, setErrors, (docId) => {
       toast.success(`Document uploaded successfully! ID: ${docId}`);
       setUploadedDocId(docId);
       setCurrentStep(2); // Move to next step
@@ -33,19 +32,19 @@ function UploadDocs() {
     <div className="uploadDocs-container">
     <h2 className="uploadDocs-heading">Upload Document and Create Signature</h2>
      <Stepper className="stepper-container" currentStep={currentStep}/>
-    <StepContent
-        currentStep={currentStep}
-        setCurrentStep={setCurrentStep}
-        name={name}
-        setFile={setFile}
-        setName={setName}
-        handleUploadSubmit={handleUploadSubmit}
-        errors={errors}
-        setErrors={setErrors}
-        uploadedDocId={uploadedDocId}
-        selectedUsers={selectedUsers}
-        setSelectedUsers={setSelectedUsers}
-    />
+      <StepContent
+          currentStep={currentStep}
+          setCurrentStep={setCurrentStep}
+          name={name}
+          setFile={setFile}
+          setName={setName}
+          handleUploadSubmit={handleUploadSubmit}
+          errors={errors}
+          setErrors={setErrors}
+          uploadedDocId={uploadedDocId}
+          selectedUsers={selectedUsers}
+          setSelectedUsers={setSelectedUsers}
+      />
     <ToastContainer />
     </div>
   );

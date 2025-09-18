@@ -5,18 +5,12 @@ const AppContext = createContext();
 
 // Create a provider component
 export const AppProvider = ({ children }) => {
-  const [documentIds, setDocumentIds] = useState([]);
   const [signatures, setSignatures] = useState([]);
-  const [statusList, setStatusList] = useState([]);
 
   return (
     <AppContext.Provider value={{
-      documentIds,
-      setDocumentIds,
       signatures,
-      setSignatures,
-      statusList,
-      setStatusList
+      setSignatures
     }}>
       {children}
     </AppContext.Provider>
