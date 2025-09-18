@@ -26,7 +26,6 @@ const StepContent = ({
               <div>
                 <label>Document Name :</label>
                 <input
-                  className={inputClass}
                   type="text"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
