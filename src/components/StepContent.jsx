@@ -1,7 +1,8 @@
 import { users } from "../constants/users";
 import CreateSignatureButton from "./CreateSignatureButton";
-import "../styles/UploadDocs.css"
+import "../styles/UploadDocs.css";
 import Error from "../components/Error";
+import Input from "../components/Input";
 
 const StepContent = ({
   currentStep,
@@ -19,29 +20,25 @@ const StepContent = ({
 
   const renderStep = () => {
     switch (currentStep) {
-      case 1:
+      case 1: 
         return (
           <div className="step-content">
             <form onSubmit={handleUploadSubmit}>
+              <Input  
+                type="text" 
+                label="Document Name" 
+                value={name} 
+                onChange={setName}
+                style={{ width: "100%", padding: "8px" }}
+              />
               <div>
-                <label>Document Name:</label>
-                <input
-                  type="text"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  style={{ width: "100%", padding: "8px" }}
-                  required
-                />
-              </div>
-
-              <div>
-                <label>Choose File:</label>
-                <input
-                  type="file"
-                  onChange={(e) => setFile(e.target.files[0])}
-                  style={{ width: "100%", padding: "8px" }}
-                  required
-                />
+                  <label >Choose File :</label>
+                  <input
+                    type="file"
+                    onChange={(e) => setFile(e.target.files[0])}
+                    style={{ width: "100%", padding: "8px" }}
+                    required
+                  />
               </div>
               <div style={{display:"flex"}}>
                 <button type="submit">Upload</button>

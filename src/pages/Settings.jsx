@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { toast, ToastContainer } from "react-toastify";
-import SettingsInput from "../components/SettingsInput";
+import Input from "../components/Input";
 import 'react-toastify/dist/ReactToastify.css';
 import "../styles/Settings.css";
 
@@ -45,9 +45,33 @@ function Settings() {
       </div>
 
         <form className="settings-form" onSubmit={handleSubmit}>
-          <SettingsInput label="X-Client-ID" value={clientId} onChange={setClientId}/>
-          <SettingsInput label="X-Client-Secret" value={clientSecret} onChange={setClientSecret}/>
-          <SettingsInput label="X-Product-Instance-ID" value={productInstanceId} onChange={setProductInstanceId}/>
+          <Input 
+            divClass="settings-input-container" 
+            labelClass="settings-label" 
+            inputClass="settings-input" 
+            type="text" 
+            label="X-Client-ID" 
+            value={clientId} 
+            onChange={setClientId} 
+            />
+            <Input 
+            divClass="settings-input-container" 
+            labelClass="settings-label" 
+            inputClass="settings-input" 
+            type="text" 
+            label="X-Client-Secret" 
+            value={clientSecret} 
+            onChange={setClientSecret} 
+            />
+            <Input 
+            divClass="settings-input-container" 
+            labelClass="settings-label" 
+            inputClass="settings-input" 
+            type="text" 
+            label="X-Product-Instance-ID"
+            value={productInstanceId} 
+            onChange={setProductInstanceId} 
+            />
           <button className="settings-btn" type="submit">Update</button>
         </form>
 
