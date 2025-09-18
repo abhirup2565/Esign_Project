@@ -2,7 +2,6 @@ import { users } from "../constants/users";
 import CreateSignatureButton from "./CreateSignatureButton";
 import "../styles/UploadDocs.css";
 import Error from "../components/Error";
-import Input from "../components/Input";
 
 const StepContent = ({
   currentStep,
@@ -24,13 +23,16 @@ const StepContent = ({
         return (
           <div className="step-content">
             <form onSubmit={handleUploadSubmit}>
-              <Input  
-                type="text" 
-                label="Document Name" 
-                value={name} 
-                onChange={setName}
-                style={{ width: "100%", padding: "8px" }}
-              />
+              <div>
+                <label>Document Name :</label>
+                <input
+                  className={inputClass}
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  style={{ width: "100%", padding: "8px" }}
+                  required/>
+              </div>
               <div>
                   <label >Choose File :</label>
                   <input
