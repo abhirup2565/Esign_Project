@@ -1,11 +1,11 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import "../styles/sidebar.css"
 const NavbarLink = ({to,Sidebar__icon,Sidebar__text})=>{
     return(<li className="Sidebar__item">
-    <Link to={to} className="Sidebar__link">
+    <NavLink to={to} className="Sidebar__link">
     <Sidebar__icon className="Sidebar__icon" />
     <span className="Sidebar__text">{Sidebar__text}</span>
-    </Link>
+    </NavLink>
     </li>)
 }
 export default NavbarLink

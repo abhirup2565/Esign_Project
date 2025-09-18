@@ -5,6 +5,9 @@ import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import handleDownload from "../utils/handleDownload";
 import StatusIndicator from "../components/StatusIndicator";
+import { FileText } from "lucide-react";
+import { FaDownload, FaLink } from "react-icons/fa";
+import "../styles/Status.css"
 
 const Status = () => {
   const { signatures, setSignatures } = useAppContext();
@@ -31,8 +34,8 @@ useEffect(() => {
   }, [signatures]);
 
   return (
-    <div style={{ padding: "20px", width:"100%"}}>
-      <h2>Status Page</h2>
+    <div className="status-page">
+      <h2 className="status-heading">Status Page</h2>
       {errors.length > 0 && (
         <div style={{ marginTop: "20px", color: "red" }}>
           <h4>Error:</h4>
@@ -40,61 +43,91 @@ useEffect(() => {
         </div>
       )}
       <StatusIndicator signatures={signatures}/>
-      {signatures.length>0?(<StatusTable signatures={signatures} setErrors={setErrors}/>):(("empty"))}
+      {signatures.length>0?(<StatusTable signatures={signatures} setErrors={setErrors}/>):<EmptyTable/>}
       <ToastContainer />
     </div>
   );
 };
 
-const StatusTable = ({ signatures, setErrors })=>{
-  return(
-    <table border="1" cellPadding="8" cellSpacing="0" style={{ width: "100%", borderCollapse: "collapse" }}>
+const EmptyTable = () => {
+  return (
+    <div className="empty-table">
+      <FileText size={64} className="empty-icon" />
+      <h3 className="empty-title">No Document Found</h3>
+      <p className="empty-subtitle">You don't have any documents yet.</p>
+    </div>
+  );
+};
+
+const StatusTable = ({ signatures, setErrors }) => {
+  const getStatusBadge = (status) => {
+    let className = "status-badge";
+    if (status === "signed") className += " signed";
+    else if (status === "pending") className += " pending";
+    else className += " other";
+
+    return <span className={className}>{status}</span>;
+  };
+
+  return (
+    <div className="status-table-card">
+      <h3 className="status-table-heading">Document Signatures</h3>
+
+      <table className="status-table">
         <thead>
           <tr>
             <th>Document ID</th>
             <th>Signer Name</th>
             <th>Signer Status</th>
             <th>Signer URL</th>
-            <th>Action</th>
+            <th>Download</th>
           </tr>
         </thead>
         <tbody>
-          {signatures.length === 0 ? (
-            <tr>
-              <td colSpan="5" style={{ textAlign: "center" }}>No signatures available</td>
-            </tr>
-          ) : (
+          {
             signatures.map((signatureRecord) => {
               const signerCount = signatureRecord.signers.length;
               return signatureRecord.signers.map((signer, index) => (
                 <tr key={`${signatureRecord.signatureId}-${index}`}>
                   {index === 0 && (
-                    <td rowSpan={signerCount}>{signatureRecord.documentId}</td>
+                    <td rowSpan={signerCount} className="doc-id">
+                      {signatureRecord.documentId}
+                    </td>
                   )}
                   <td>{signer.name}</td>
-                  <td>{signer.status}</td>
+                  <td>{getStatusBadge(signer.status)}</td>
                   <td>
-                    <a href={signer.signatureUrl} target="_blank" rel="noopener noreferrer">
-                      Link to Sign
+                    <a
+                      href={signer.signatureUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="link-icon"
+                    >
+                      <FaLink />
                     </a>
                   </td>
                   {index === 0 && (
-                    <td rowSpan={signerCount}>
+                    <td rowSpan={signerCount} className="action-cell">
                       {signatureRecord.complete && (
-                        <button onClick={() => handleDownload(signatureRecord.signatureId,setErrors,toast)}>
-                          Download
+                        <button
+                          onClick={() =>
+                            handleDownload(signatureRecord.signatureId, setErrors, toast)
+                          }
+                          className="download-btn"
+                        >
+                          <FaDownload />
                         </button>
                       )}
                     </td>
                   )}
-
                 </tr>
               ));
             })
-          )}
+          }
         </tbody>
       </table>
-  )
-}
+    </div>
+  );
+};
 
 export default Status;

@@ -22,7 +22,7 @@ const handleDownload = async (signatureId, setErrors, toast) => {
       link.rel = 'noopener noreferrer';
       // Note: link is never added to the DOM
       link.click();
-      toast.success("Download started!");
+      toast.success("Downloading started!");
     } else {
       setErrors(prev => [...prev, "Download URL not found in response."]);
     }

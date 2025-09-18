@@ -30,9 +30,14 @@
   padding: 10px;
   transition: background-color 0.3s ease;
 }
+.Sidebar__link.active
+{
+  background-color: #f4f6f9;
+}
 
-.Sidebar__link:hover {
-  background-color: #333;
+.Sidebar__link.active .Sidebar__icon,
+.Sidebar__link.active .Sidebar__text {
+  color: #222;
 }
 
 .Sidebar__icon {
