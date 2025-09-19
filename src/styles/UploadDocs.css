@@ -1,3 +1,5 @@
+
+
 /* Container */
 .uploadDocs-container {
   width: 100%;
@@ -118,6 +120,12 @@
   display: flex;
   gap: 20px; /* spacing between selected users and user list */
   width: 100%;
+}
+@media(max-width:700px)
+{
+  .step2-flex-container {
+  flex-direction: column;
+}
 }
 
 /* Selected Users Section */

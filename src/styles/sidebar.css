@@ -54,3 +54,46 @@
 .Sidebar:hover .Sidebar__text {
   opacity: 1;
 }
+
+/* Responsive  */
+@media (max-width: 700px) {
+  .Sidebar {
+    width: 0;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: -200px; /* hidden by default */
+    transition: left 0.3s ease;
+  }
+
+  .Sidebar.open {
+    left: 0; /* show when open */
+    width: 100%;
+    z-index: 2;
+  }
+
+  .Sidebar__text {
+    opacity: 1; /* show text always in mobile */
+  }
+
+  .hamburger {
+    display: block;
+    position: fixed;
+    top: 5px;
+    left: 15px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #222;
+    z-index: 1100; /* above sidebar */
+  }
+  .hamburger.open {
+    color: #f4f6f9;
+  }
+}
+
+/* Desktop hide hamburger */
+@media (min-width: 701px) {
+.hamburger {
+  display: none;
+}
+}

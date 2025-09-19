@@ -3,23 +3,19 @@ import { toast, ToastContainer } from "react-toastify";
 import SettingsInput from "../components/SettingsInput";
 import 'react-toastify/dist/ReactToastify.css';
 import "../styles/Settings.css";
+import settingsChanged from "../utils/settingsChanged";
 
 function Settings() {
   // State to hold input values
-  const [clientId, setClientId] = useState("");
-  const [clientSecret, setClientSecret] = useState("");
-  const [productInstanceId, setProductInstanceId] = useState("");
+  const [clientId, setClientId] = useState(localStorage.getItem("x-client-id") || "");
+  const [clientSecret, setClientSecret] = useState(localStorage.getItem("x-client-secret") || "");
+  const [productInstanceId, setProductInstanceId] = useState(localStorage.getItem("x-product-instance-id") || "");
+  const [update, setUpdate] = useState(false);
 
-  // Load saved settings from localStorage on component mount
+  // Detecting changes
     useEffect(() => {
-    const savedClientId = localStorage.getItem("x-client-id") || "";
-    const savedClientSecret = localStorage.getItem("x-client-secret") || "";
-    const savedProductInstanceId = localStorage.getItem("x-product-instance-id") || "";
-
-    setClientId(savedClientId);
-    setClientSecret(savedClientSecret);
-    setProductInstanceId(savedProductInstanceId);
-  }, []);
+    settingsChanged(clientId,clientSecret,productInstanceId)?setUpdate(true):setUpdate(false);
+  }, [clientId,clientSecret,productInstanceId]);
 
   // Handle form submission
   const handleSubmit = (e) => {
@@ -60,7 +56,7 @@ function Settings() {
               value={productInstanceId} 
               onChange={setProductInstanceId} 
             />
-          <button className="settings-btn" type="submit">Update</button>
+          {update&&(<button className="settings-btn" type="submit">Update</button>)}
         </form>
 
         <ToastContainer position="top-right" autoClose={2000}/>
