@@ -1,4 +1,4 @@
-import  createSignatureRequest  from "../utils/createSignatureRequest";
+import  createSignatureRequest  from "../networks/createSignatureRequest";
 import { useAppContext } from "../context/AppContext";
 import { toast } from "react-toastify";
 

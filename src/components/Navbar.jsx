@@ -8,9 +8,12 @@ function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <>
-    <div className={`hamburger ${isOpen ? "open" : ""}`} onClick={() => setIsOpen(!isOpen)}>
-        <FaBars />
-      </div>
+    <div className="hamburger-container">
+        <div className={`hamburger ${isOpen ? "open" : ""}`} onClick={() => setIsOpen(!isOpen)}>
+          <FaBars />
+        </div>
+    </div>
+    
     <nav className={`Sidebar ${isOpen ? "open" : ""}`}>
       <ul className="Sidebar__container">
         <NavbarLink to="/" Sidebar__icon={MdDashboard} Sidebar__text="Status" onClick={() => setIsOpen(false)}/>

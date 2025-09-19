@@ -1,4 +1,4 @@
-import refreshSignature from "../utils/refreshSignature";
+import refreshSignature from "../networks/refreshSignature";
 
 export const handleRefresh = async (signatureId,
   setSignatures,

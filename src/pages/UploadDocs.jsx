@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useAppContext } from "../context/AppContext";
 import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-import { uploadDocument } from "../utils/uploadDocument";
+import { uploadDocument } from "../networks/uploadDocument";
 import StepContent from "../components/StepContent";
 import Stepper from "../components/Stepper";
 import "../styles/UploadDocs.css"

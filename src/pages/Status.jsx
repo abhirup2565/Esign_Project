@@ -3,7 +3,7 @@ import { useAppContext } from "../context/AppContext";
 import { handleRefresh} from "../utils/handleRefresh";
 import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-import handleDownload from "../utils/handleDownload";
+import handleDownload from "../networks/handleDownload";
 import StatusIndicator from "../components/StatusIndicator";
 import { FileText } from "lucide-react";
 import { FaDownload, FaLink } from "react-icons/fa";
