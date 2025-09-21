@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'https://dg-sandbox.setu.co',
+        target: 'http://localhost:8000/',
         changeOrigin: true,
       }
     }

@@ -15,7 +15,7 @@ export const uploadDocument = async (file, name, setErrors,onSuccess) => {
   };
 
   try {
-    const resp = await fetch("/api/documents", requestOptions);
+    const resp = await fetch("/api/documents/", requestOptions);
     if (!resp.ok) {
       throw new Error(`HTTP error! status: ${resp.status}`);
     }

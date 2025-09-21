@@ -10,7 +10,7 @@ const handleDownload = async (signatureId, setErrors, toast) => {
   };
 
   try {
-    const response = await fetch(`/api/signature/${signatureId}/download`, requestOptions);
+    const response = await fetch(`/api/documents/${signatureId}/`, requestOptions);
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }

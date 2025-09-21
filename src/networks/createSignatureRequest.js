@@ -34,7 +34,7 @@ const createSignatureRequest = async (documentId, selectedUsers, setErrors, onSu
   };
 
   try {
-    const resp = await fetch("/api/signature", requestOptions);
+    const resp = await fetch("/api/signature/", requestOptions);
     if (!resp.ok) {
       throw new Error(`HTTP error! status: ${resp.status}`);
     }

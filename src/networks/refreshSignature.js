@@ -10,7 +10,7 @@ const refreshSignature = async (signatureId, setErrors, onSuccess) => {
   };
 
   try {
-    const resp = await fetch(`/api/signature/${signatureId}`, requestOptions);
+    const resp = await fetch(`/api/signature/${signatureId}/`, requestOptions);
     if (!resp.ok) {
       throw new Error(`HTTP error! status: ${resp.status}`);
     }
