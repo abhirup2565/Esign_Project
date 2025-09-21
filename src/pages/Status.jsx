@@ -17,7 +17,7 @@ const Status = () => {
 useEffect(() => {
     signatures.forEach(signatureRecord => {
       const isAlreadyPolling = signatureRecord.polling;
-      const isComplete = signatureRecord.signers.every(signer => signer.status === "signed");
+      const isComplete = signatureRecord.status === "sign_complete";
 
       if (!isAlreadyPolling && !isComplete) {
         // Mark the signature as polling to avoid multiple triggers
@@ -32,6 +32,7 @@ useEffect(() => {
         handleRefresh(signatureRecord.signatureId, setSignatures, setErrors);
       }
     });
+    console.log(signatures);
   }, [signatures]);
 
   return (

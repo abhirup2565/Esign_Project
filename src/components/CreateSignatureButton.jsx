@@ -24,7 +24,8 @@ const CreateSignatureButton = ({
         console.log("Signature request response:", data);
         setSignatures(prev => [...prev, {
             signatureId: data.id,
-            documentId: uploadedDocId,
+            documentId: data.documentId,
+            status: data.status,
             signers: data.signers.map(signer => ({
             signatureUrl: signer.url,
             status: signer.status,

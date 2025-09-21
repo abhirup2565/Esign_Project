@@ -14,6 +14,7 @@ export const handleRefresh = async (signatureId,
         setSignatures(prev => prev.map(sig =>
           sig.signatureId === data.id ? {
             ...sig,
+            status:sig.status,
             signers: sig.signers.map(signer => {
               const updatedSigner = data.signers.find(s => s.displayName === signer.name);
               return updatedSigner ? { ...signer, status: updatedSigner.status } : signer;
@@ -21,8 +22,8 @@ export const handleRefresh = async (signatureId,
           } : sig
         ));
 
-        // Check if all signers have status "signed"
-        allSigned = data.signers.every(signer => signer.status === "signed");
+        // Check if all signers have signed
+        allSigned = data.status === "sign_complete";
       });
     }
      setSignatures(prev =>
