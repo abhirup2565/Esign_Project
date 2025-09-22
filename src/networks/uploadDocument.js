@@ -25,6 +25,6 @@ export const uploadDocument = async (file, name, setErrors,onSuccess) => {
     onSuccess(data.id)
   } catch (error) {
     console.error("An error occurred:", error);
-    setErrors([`An error occurred: ${error.message}`]);
+    setErrors([`An error occurred: ${error}`]);
   }
 };

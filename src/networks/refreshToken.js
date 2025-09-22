@@ -1,4 +1,4 @@
-const refresh = async () => {
+const refreshToken = async () => {
   const res = await fetch("/api/token/refresh/", {
     method: "POST",
     headers: { "Content-Type": "application/json" },

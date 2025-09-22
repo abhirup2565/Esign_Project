@@ -1,4 +1,4 @@
-export default async function LoginRequest(username, password,setError)
+export default async function LoginRequest(username, password,setError,login)
 {
      try {
       const res = await fetch("api/token/", {
@@ -15,8 +15,11 @@ export default async function LoginRequest(username, password,setError)
       */
       if (res.ok) {
         const data = await res.json();
-        localStorage.setItem("access", data.access);
-        localStorage.setItem("refresh", data.refresh);
+        const userInfo = {
+          user_id: data.user_id,
+          is_manager: data.is_manager,
+        };
+        login(userInfo, data.access, data.refresh); //sets value context and local storage
         return true;
       } else {
         setError("Invalid username or password");
