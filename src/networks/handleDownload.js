@@ -1,4 +1,5 @@
 import { getHeaders } from "./getHeaders";
+import { BASE_URL } from "../constants/network";
 
 const handleDownload = async (signatureId, setErrors, toast) => {
   const myHeaders = getHeaders();
@@ -10,7 +11,7 @@ const handleDownload = async (signatureId, setErrors, toast) => {
   };
 
   try {
-    const response = await fetch(`/api/documents/${signatureId}/`, requestOptions);
+    const response = await fetch(`${BASE_URL}documents/${signatureId}/`, requestOptions);
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }

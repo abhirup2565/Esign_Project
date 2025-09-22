@@ -1,5 +1,6 @@
 import { getHeaders } from "./getHeaders";
 import { users } from "../constants/users";
+import { BASE_URL } from "../constants/network";
 
 const createSignatureRequest = async (documentId, selectedUsers, setErrors, onSuccess) => {
   const myHeaders = getHeaders();
@@ -34,7 +35,7 @@ const createSignatureRequest = async (documentId, selectedUsers, setErrors, onSu
   };
 
   try {
-    const resp = await fetch("/api/signature/", requestOptions);
+    const resp = await fetch(`${BASE_URL}/api/signature/`, requestOptions);
     if (!resp.ok) {
       throw new Error(`HTTP error! status: ${resp.status}`);
     }

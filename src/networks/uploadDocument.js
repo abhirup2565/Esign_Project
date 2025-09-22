@@ -1,7 +1,9 @@
 import { getHeaders } from "./getHeaders";
+import { BASE_URL } from "../constants/network";
+import {fetchWithAuth} from "./fetchwithAuth";
 
 export const uploadDocument = async (file, name, setErrors,onSuccess) => {
-  const myHeaders = getHeaders();
+  //const myHeaders = getHeaders();
 
   const formdata = new FormData();
   formdata.append("name", name);
@@ -9,13 +11,13 @@ export const uploadDocument = async (file, name, setErrors,onSuccess) => {
 
   const requestOptions = {
     method: "POST",
-    headers: myHeaders,
+    headers:"",
     body: formdata,
     redirect: "follow"
   };
 
   try {
-    const resp = await fetch("/api/documents/", requestOptions);
+    const resp = await fetchWithAuth(`documents/`, requestOptions);
     if (!resp.ok) {
       throw new Error(`HTTP error! status: ${resp.status}`);
     }

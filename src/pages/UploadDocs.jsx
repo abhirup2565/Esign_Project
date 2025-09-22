@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useAppContext } from "../wrappers/AppContext";
 import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { uploadDocument } from "../networks/uploadDocument";

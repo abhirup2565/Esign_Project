@@ -10,6 +10,7 @@ import "./App.css";
 import LoginPage from "./pages/Login";
 import Logout from "./pages/Logout";
 import HomePage from "./pages/Home";
+import UserCreatePage from "./pages/UserCreatePage";
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
           <Route path="/login" element={<PublicRoute><LoginPage/></PublicRoute>} />
           <Route path="/logout" element={<PrivateRoute><Logout/></PrivateRoute>} />
           <Route path="/status" element={<PrivateRoute><Status/></PrivateRoute>} />
+          <Route path="/create-user" element={<PrivateRoute managerOnly={true}><UserCreatePage/></PrivateRoute>} />
           <Route path="/upload" element={<PrivateRoute managerOnly={true}><UploadDocs/></PrivateRoute>} />
           <Route path="/settings" element={<PrivateRoute managerOnly={true}><Settings/></PrivateRoute>} />
           {/* Catch all: custom error page */}
