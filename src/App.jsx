@@ -6,6 +6,8 @@ import Settings from "./pages/Settings";
 import { AppProvider } from "./wrappers/AppContext";
 import PrivateRoute from "./wrappers/PrivateRoute";
 import "./App.css";
+import LoginPage from "./pages/Login";
+import Logout from "./pages/Logout";
 
 function App() {
   return (
@@ -14,7 +16,9 @@ function App() {
       <div style={{display:"flex"}}>
         <Navbar />
         <Routes>
-          <Route path="/" element={<PrivateRoute><Status/></PrivateRoute>} />
+          <Route path="/login" element={<LoginPage/>} />
+          <Route path="/logout" element={<PrivateRoute><Logout/></PrivateRoute>} />
+          <Route path="/status" element={<PrivateRoute><Status/></PrivateRoute>} />
           <Route path="/upload" element={<PrivateRoute><UploadDocs/></PrivateRoute>} />
           <Route path="/settings" element={<PrivateRoute><Settings/></PrivateRoute>} />
         </Routes>

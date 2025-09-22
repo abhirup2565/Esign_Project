@@ -16,7 +16,7 @@ function Navbar() {
     
     <nav className={`Sidebar ${isOpen ? "open" : ""}`}>
       <ul className="Sidebar__container">
-        <NavbarLink to="/" Sidebar__icon={MdDashboard} Sidebar__text="Status" onClick={() => setIsOpen(false)}/>
+        <NavbarLink to="/status" Sidebar__icon={MdDashboard} Sidebar__text="Status" onClick={() => setIsOpen(false)}/>
         <NavbarLink to="/upload" Sidebar__icon={FaUpload} Sidebar__text="Upload Docs" onClick={() => setIsOpen(false)}/>
         <NavbarLink to="/settings" Sidebar__icon={FaCog} Sidebar__text="Settings" onClick={() => setIsOpen(false)}/>
       </ul>
