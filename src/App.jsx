@@ -3,7 +3,8 @@ import Navbar from "./components/Navbar";
 import Status from "./pages/Status";
 import UploadDocs from "./pages/UploadDocs";
 import Settings from "./pages/Settings";
-import { AppProvider } from "./context/AppContext";
+import { AppProvider } from "./wrappers/AppContext";
+import PrivateRoute from "./wrappers/PrivateRoute";
 import "./App.css";
 
 function App() {
@@ -13,9 +14,9 @@ function App() {
       <div style={{display:"flex"}}>
         <Navbar />
         <Routes>
-          <Route path="/" element={<Status/>} />
-          <Route path="/upload" element={<UploadDocs />} />
-          <Route path="/settings" element={<Settings />} />
+          <Route path="/" element={<PrivateRoute><Status/></PrivateRoute>} />
+          <Route path="/upload" element={<PrivateRoute><UploadDocs/></PrivateRoute>} />
+          <Route path="/settings" element={<PrivateRoute><Settings/></PrivateRoute>} />
         </Routes>
       </div>
     </Router>

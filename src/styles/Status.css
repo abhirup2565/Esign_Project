@@ -46,8 +46,6 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   margin-top: 20px;
   margin-bottom: 20px;
-  height: 375px;
-  overflow-y: scroll;
 }
 
 .status-table-heading {
