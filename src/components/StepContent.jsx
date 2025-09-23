@@ -1,7 +1,9 @@
-import { users } from "../constants/users";
+// import { users } from "../constants/users";
 import CreateSignatureButton from "./CreateSignatureButton";
 import "../styles/UploadDocs.css";
 import Error from "../components/Error";
+import { userList } from "../networks/usersList";
+import { useEffect, useState } from "react";
 
 const StepContent = ({
   currentStep,
@@ -16,6 +18,21 @@ const StepContent = ({
   selectedUsers,
   setSelectedUsers
 }) => {
+
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+   const fetch = async () => {
+    try {
+      const data = await userList(setErrors);
+      console.log(data);
+      setUsers(data);
+    } catch (error) {
+      console.error("Error fetching users:", error);
+    }
+    };
+    fetch()
+    },[setErrors]);
 
   const renderStep = () => {
     switch (currentStep) {
@@ -62,7 +79,7 @@ const StepContent = ({
                   <div className="selected-users-list">
                     {selectedUsers.map((user) => (
                       <span key={user.identifier} className="selected-user-item">
-                        {user.name}
+                        {user.displayName}
                       </span>
                     ))}
                   </div>
@@ -84,7 +101,7 @@ const StepContent = ({
                                   if (e.target.checked) {
                                     setSelectedUsers((prev) => [
                                       ...prev,
-                                      { identifier: user.identifier, name: user.displayName }
+                                      { identifier: user.identifier, displayName: user.displayName,birthYear: user.birthYear}
                                     ]);
                                   } else {
                                     setSelectedUsers((prev) =>
@@ -93,7 +110,7 @@ const StepContent = ({
                                   }
                                 }}
                               />
-                              <span className="user-name">{user.displayName} ({user.birthYear})</span>
+                              <span className="user-name">{user.displayName} (Id:{user.identifier})</span>
                             </label>
                           </li>
                         ))}

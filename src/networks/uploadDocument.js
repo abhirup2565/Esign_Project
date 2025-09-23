@@ -1,9 +1,6 @@
-import { getHeaders } from "./getHeaders";
-import { BASE_URL } from "../constants/network";
 import {fetchWithAuth} from "./fetchwithAuth";
 
 export const uploadDocument = async (file, name, setErrors,onSuccess) => {
-  //const myHeaders = getHeaders();
 
   const formdata = new FormData();
   formdata.append("name", name);

@@ -1,17 +1,12 @@
-import { getHeaders } from "./getHeaders";
-import { users } from "../constants/users";
-import { BASE_URL } from "../constants/network";
+import { fetchWithAuth } from "./fetchwithAuth";
 
 const createSignatureRequest = async (documentId, selectedUsers, setErrors, onSuccess) => {
-  const myHeaders = getHeaders();
-  myHeaders.append("Content-Type", "application/json");
 
-  const signers = selectedUsers.map(({ identifier }) => {
-    const user = users.find(u => u.identifier === identifier);
+  const signers = selectedUsers.map((selectedUser) => {
     return {
-      identifier: user.identifier,
-      displayName: user.displayName,
-      birthYear: user.birthYear,
+      identifier: String(selectedUser.identifier),
+      displayName: selectedUser.displayName,
+      birthYear: String(selectedUser.birthYear),
       signature: {
         height: 60,
         width: 180,
@@ -23,23 +18,25 @@ const createSignatureRequest = async (documentId, selectedUsers, setErrors, onSu
 
   const raw = JSON.stringify({
     documentId,
-    redirectUrl: "http://setu.co",
+    redirectUrl: "http://setu.co",//change to base url later
     signers
   });
 
   const requestOptions = {
     method: "POST",
-    headers: myHeaders,
+    headers:{
+    "Content-Type": "application/json"
+    },
     body: raw,
     redirect: "follow"
   };
 
   try {
-    const resp = await fetch(`${BASE_URL}/api/signature/`, requestOptions);
+    const resp = await fetchWithAuth(`signature/`, requestOptions);
+    console.log("Sending payload:", raw);
     if (!resp.ok) {
       throw new Error(`HTTP error! status: ${resp.status}`);
     }
-
     const data = await resp.json();
     setErrors([]); // Clear errors on success
     onSuccess(data); // Call the provided callback

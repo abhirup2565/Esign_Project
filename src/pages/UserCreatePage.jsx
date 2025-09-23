@@ -26,7 +26,7 @@ export default function UserCreatePage() {
           "username":username,
           "password":password,
           "dob": dob,
-          "is_manager": isManager,
+          "is_staff": isManager,
         }),
       });
 
