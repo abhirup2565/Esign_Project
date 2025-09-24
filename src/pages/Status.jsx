@@ -136,10 +136,10 @@ const StatusTable = ({ signatures, setErrors }) => {
                   </td>
                   {index === 0 && (
                     <td rowSpan={signerCount} className="action-cell">
-                      {signatureRecord.complete && (
+                      {signatureRecord.status==="sign_complete" && (
                         <button
                           onClick={() =>
-                            handleDownload(signatureRecord.signatureId, setErrors, toast)
+                            handleDownload(signatureRecord.signature_id, setErrors, toast)
                           }
                           className="download-btn"
                         >

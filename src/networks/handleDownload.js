@@ -1,22 +1,21 @@
-import { getHeaders } from "./getHeaders";
-import { BASE_URL } from "../constants/network";
+import { fetchWithAuth } from "./fetchWithAuth";
 
 const handleDownload = async (signatureId, setErrors, toast) => {
-  const myHeaders = getHeaders();
+
 
   const requestOptions = {
     method: "GET",
-    headers: myHeaders,
+    headers: "",
     redirect: "follow"
   };
 
   try {
-    const response = await fetch(`${BASE_URL}documents/${signatureId}/`, requestOptions);
+    const response = await fetchWithAuth(`download/${signatureId}/`, requestOptions);
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const data = await response.json();
-
+    console.log(data)
     if (data.downloadUrl) {
       const link = document.createElement('a');
       link.href = data.downloadUrl;

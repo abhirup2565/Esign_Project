@@ -115,7 +115,7 @@ const StatusTable = ({ signatures, setErrors }) => {
             signatures.map((signatureRecord) => {
               const signerCount = signatureRecord.signers.length;
               return signatureRecord.signers.map((signer, index) => (
-                <tr key={`${signatureRecord.signatureId}-${index}`}>
+                <tr key={`${signatureRecord.signature_id}-${index}`}>
                   {index === 0 && (
                     <td rowSpan={signerCount} className="doc-id">
                       {signatureRecord.document_id}
@@ -137,9 +137,7 @@ const StatusTable = ({ signatures, setErrors }) => {
                     <td rowSpan={signerCount} className="action-cell">
                       {signatureRecord.status==="sign_complete" && (
                         <button
-                          onClick={() =>
-                            handleDownload(signatureRecord.signatureId, setErrors, toast)
-                          }
+                          onClick={() =>handleDownload(signatureRecord.signature_id, setErrors, toast)}
                           className="download-btn"
                         >
                           <FaDownload />
