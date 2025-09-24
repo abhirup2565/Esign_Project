@@ -1,7 +1,9 @@
+import { BASE_URL } from "../constants/network";
+
 export default async function LoginRequest(username, password,setError,login)
 {
      try {
-      const res = await fetch("api/token/", {
+      const res = await fetch(`${BASE_URL}token/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -16,6 +18,7 @@ export default async function LoginRequest(username, password,setError,login)
       if (res.ok) {
         const data = await res.json();
         const userInfo = {
+          user_username:data.user_username,
           user_id: data.user_id,
           is_manager: data.is_manager,
         };

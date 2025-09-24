@@ -12,14 +12,14 @@ import Logout from "./pages/Logout";
 import HomePage from "./pages/Home";
 import UserCreatePage from "./pages/UserCreatePage";
 import DashboardPage from "./pages/DashboardPage";
+import Layout from "./components/layout";
 
 
 function App() {
   return (
     <AppProvider>
+      <Layout>
     <Router>
-      <div style={{display:"flex"}}>
-        <Navbar />
         <Routes>
           <Route path="/" element={<HomePage/>} />
           <Route path="/login" element={<PublicRoute><LoginPage/></PublicRoute>} />
@@ -32,8 +32,8 @@ function App() {
           {/* Catch all: custom error page */}
           <Route path="*" element={<Navigate to="/login" replace />} />
         </Routes>
-      </div>
     </Router>
+    </Layout>
     </AppProvider>
   );
 }

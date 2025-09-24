@@ -1,4 +1,5 @@
-const HomePage = ()=>{
-    return(<h1>Home Page schad</h1>)
+export default function HomePage() {
+  return (
+    <h1>Hello</h1>
+  )
 }
-export default HomePage
