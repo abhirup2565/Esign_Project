@@ -9,34 +9,33 @@ import { FileText } from "lucide-react";
 import { FaDownload, FaLink } from "react-icons/fa";
 import "../styles/Status.css"
 import Error from "../components/Error";
-import { statusList } from "../networks/statusList";
+import { dashboardList } from "../networks/dashboardList";
 
-const Status = () => {
+const DashboardPage = () => {
   const [ signatures, setSignatures ] = useState([]);
   const [errors, setErrors] = useState([]);
 
   useEffect(() => {
-  const fetchData = async () => {
-    try {
-      const data = await statusList(setErrors);
-      setSignatures(data);
-    } catch (error) {
-      console.error("Error fetching users:", error);
-    }
-  };
-  // fetch immediately
-  fetchData();
-  // set up polling
-  const interval = setInterval(fetchData, 5000);
-  // cleanup on unmount
-  return () => clearInterval(interval); 
-}, [setErrors, setSignatures]);
-
+    const fetchData = async () => {
+      try {
+        const data = await dashboardList(setErrors);
+        setSignatures(data);
+      } catch (error) {
+        console.error("Error fetching users:", error);
+      }
+    };
+    // fetch immediately
+    fetchData();
+    // set up polling
+    const interval = setInterval(fetchData, 5000);
+    // cleanup on unmount
+    return () => clearInterval(interval); 
+  }, [setErrors, setSignatures]);
 
 //   useEffect(() => {
 //    const fetch = async () => {
 //     try {
-//       const data = await statusList(setErrors);
+//       const data = await dashboardList(setErrors);
 //       setSignatures(data);
 //     } catch (error) {
 //       console.error("Error fetching users:", error);
@@ -136,7 +135,7 @@ const StatusTable = ({ signatures, setErrors }) => {
                   </td>
                   {index === 0 && (
                     <td rowSpan={signerCount} className="action-cell">
-                      {signatureRecord.complete && (
+                      {signatureRecord.status==="sign_complete" && (
                         <button
                           onClick={() =>
                             handleDownload(signatureRecord.signatureId, setErrors, toast)
@@ -159,4 +158,4 @@ const StatusTable = ({ signatures, setErrors }) => {
   );
 };
 
-export default Status;
+export default DashboardPage;

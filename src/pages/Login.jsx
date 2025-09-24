@@ -16,7 +16,10 @@ export default function LoginPage() {
     e.preventDefault();
     setError("");
     const success = await LoginRequest(username, password, setError,login);
-    if (success) navigate("/status"); 
+    if(success)
+    {
+      navigate("/dashboard")
+    }; 
   };
 
   return (

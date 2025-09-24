@@ -10,7 +10,7 @@ function PrivateRoute({ children, managerOnly = false }) {
   }
   // If route is for managers only and user is not a manager
   if (managerOnly && !user.is_manager) {
-    return <Navigate to="/status" replace />; // Or any "Unauthorized" page
+    return <Navigate to="/dashboard" replace />; // Or any "Unauthorized" page
   }
   return children; // Render the protected component
 };
