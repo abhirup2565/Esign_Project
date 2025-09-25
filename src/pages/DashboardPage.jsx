@@ -10,6 +10,7 @@ import { FaDownload, FaLink } from "react-icons/fa";
 import "../styles/Status.css"
 import Error from "../components/Error";
 import { dashboardList } from "../networks/dashboardList";
+import { DataTable } from "../components/data-table";
 
 const DashboardPage = () => {
   const [ signatures, setSignatures ] = useState([]);
@@ -66,11 +67,11 @@ const DashboardPage = () => {
 //   }, [signatures]);
 
   return (
-    <div className="status-page">
-      <h2 className="status-heading">Status Page</h2>
+    <div>
+      <h2 className="status-heading">Dashboard Page</h2>
       <Error errors={errors}/>
       <StatusIndicator signatures={signatures}/>
-      {signatures.length>0?(<StatusTable signatures={signatures} setErrors={setErrors}/>):<EmptyTable/>}
+      {signatures.length>0?(<DataTable data={signatures}/>):<EmptyTable/>}
       <ToastContainer />
     </div>
   );
@@ -85,7 +86,7 @@ const EmptyTable = () => {
     </div>
   );
 };
-
+// <StatusTable signatures={signatures} setErrors={setErrors}/>
 const StatusTable = ({ signatures, setErrors }) => {
   const getStatusBadge = (status) => {
     let className = "status-badge";

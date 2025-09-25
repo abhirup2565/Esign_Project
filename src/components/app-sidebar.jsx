@@ -24,7 +24,7 @@ const PublicItems = [
 ]
 const ProtectedItems = [
   {
-    title: "Dashborad",
+    title: "Dashboard",
     url: "/dashboard",
     icon: LayoutDashboard,
   },

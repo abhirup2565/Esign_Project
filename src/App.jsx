@@ -13,12 +13,15 @@ import HomePage from "./pages/Home";
 import UserCreatePage from "./pages/UserCreatePage";
 import DashboardPage from "./pages/DashboardPage";
 import Layout from "./components/layout";
-
+import { ThemeProvider } from "./components/theme-provider";
+import { ModeToggle } from "./components/mode-toggle";
 
 function App() {
   return (
     <AppProvider>
+      <ThemeProvider>
       <Layout>
+        <ModeToggle/>
     <Router>
         <Routes>
           <Route path="/" element={<HomePage/>} />
@@ -34,6 +37,7 @@ function App() {
         </Routes>
     </Router>
     </Layout>
+    </ThemeProvider>
     </AppProvider>
   );
 }

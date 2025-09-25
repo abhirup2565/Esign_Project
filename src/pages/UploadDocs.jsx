@@ -28,7 +28,8 @@ function UploadDocs() {
   };
 
   return (
-    <div className="uploadDocs-container">
+    <div className="flex min-h-svh w-full items-center justify-center">
+    <div className="w-full max-w-sm">
     <h2 className="uploadDocs-heading">Upload Document and Create Signature</h2>
      <Stepper className="stepper-container" currentStep={currentStep}/>
       <StepContent
@@ -45,7 +46,7 @@ function UploadDocs() {
           setSelectedUsers={setSelectedUsers}
       />
     <ToastContainer />
-    </div>
+    </div></div>
   );
 }
 

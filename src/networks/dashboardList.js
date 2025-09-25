@@ -1,4 +1,4 @@
-import {fetchWithAuth} from "./fetchWithAuth";
+import {fetchWithAuth} from "./fetchwithAuth";
 
 export const dashboardList = async (setErrors) => {
 
