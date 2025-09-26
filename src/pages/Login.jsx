@@ -21,13 +21,13 @@ export default function LoginPage() {
   const {login} = useAppContext()
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [error, setError] = useState([]);
   const navigate = useNavigate();
   
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError("");
+    setError([]);
     const success = await LoginRequest(username, password, setError,login);
     if(success)
     {

@@ -25,12 +25,12 @@ export default async function LoginRequest(username, password,setError,login)
         login(userInfo, data.access, data.refresh); //sets value context and local storage
         return true;
       } else {
-        setError("Invalid username or password");
+        setError(["Invalid username or password"]);
         return false;
         }
     } catch (err) {
       console.error(err);
-      setError("Something went wrong. Try again later.");
+      setError(["Something went wrong. Try again later."]);
       return false;
     }
 }
