@@ -1,0 +1,12 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "module": "ESNext",
+    "target": "ESNext",
+    "moduleResolution": "node",
+    "strict": false,
+    "noEmit": true
+  },
+  "include": ["vite.config.js", "scripts/**/*"],
+  "exclude": ["node_modules"]
+}

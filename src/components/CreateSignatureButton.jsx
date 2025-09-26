@@ -1,6 +1,7 @@
 import  createSignatureRequest  from "../networks/createSignatureRequest";
 import { useAppContext } from "../wrappers/AppContext";
 import { toast } from "react-toastify";
+import { Button } from "./ui/button";
 
 const CreateSignatureButton = ({
   uploadedDocId,
@@ -38,12 +39,11 @@ const CreateSignatureButton = ({
   };
 
   return (
-    <button
-      style={{ marginTop: "20px", padding: "10px 20px" }}
+    <Button className="w-full"
       onClick={handleClick}
     >
       Create Signature Request
-    </button>
+    </Button>
   );
 };
 

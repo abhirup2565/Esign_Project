@@ -1,25 +1,26 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
-import Navbar from "./components/Navbar";
-import Status from "./pages/Status";
-import UploadDocs from "./pages/UploadDocs";
-import Settings from "./pages/Settings";
 import { AppProvider } from "./wrappers/AppContext";
 import PrivateRoute from "./wrappers/PrivateRoute";
 import PublicRoute from "./wrappers/PublicRoute";
-import "./App.css";
+import Status from "./pages/Status";
+import UploadDocs from "./pages/UploadDocs";
 import LoginPage from "./pages/Login";
 import Logout from "./pages/Logout";
 import HomePage from "./pages/Home";
 import UserCreatePage from "./pages/UserCreatePage";
 import DashboardPage from "./pages/DashboardPage";
-
+import Layout from "./components/layout";
+import { ThemeProvider } from "./components/theme-provider";
+import { ModeToggle } from "./components/mode-toggle";
+import "./App.css";
 
 function App() {
   return (
     <AppProvider>
+      <ThemeProvider>
+      <Layout>
+        <ModeToggle/>
     <Router>
-      <div style={{display:"flex"}}>
-        <Navbar />
         <Routes>
           <Route path="/" element={<HomePage/>} />
           <Route path="/login" element={<PublicRoute><LoginPage/></PublicRoute>} />
@@ -28,12 +29,12 @@ function App() {
           <Route path="/dashboard" element={<PrivateRoute><DashboardPage/></PrivateRoute>} />
           <Route path="/create-user" element={<PrivateRoute managerOnly={true}><UserCreatePage/></PrivateRoute>} />
           <Route path="/upload" element={<PrivateRoute managerOnly={true}><UploadDocs/></PrivateRoute>} />
-          <Route path="/settings" element={<PrivateRoute managerOnly={true}><Settings/></PrivateRoute>} />
           {/* Catch all: custom error page */}
           <Route path="*" element={<Navigate to="/login" replace />} />
         </Routes>
-      </div>
     </Router>
+    </Layout>
+    </ThemeProvider>
     </AppProvider>
   );
 }

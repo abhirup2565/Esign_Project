@@ -4,7 +4,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import { uploadDocument } from "../networks/uploadDocument";
 import StepContent from "../components/StepContent";
 import Stepper from "../components/Stepper";
-import "../styles/UploadDocs.css"
+import Error from "../components/Error";
+
 
 function UploadDocs() {
   const [file, setFile] = useState(null);
@@ -28,9 +29,14 @@ function UploadDocs() {
   };
 
   return (
-    <div className="uploadDocs-container">
-    <h2 className="uploadDocs-heading">Upload Document and Create Signature</h2>
-     <Stepper className="stepper-container" currentStep={currentStep}/>
+    <>
+    <h2 className="text-2xl font-bold text-primary mb-6 md:text-3xl">
+        Upload File
+    </h2>
+    <div className="flex min-h-svh w-full items-center justify-center">
+    <div className="w-full max-w-sm">
+     <Stepper currentStep={currentStep}/>
+     <Error errors={errors}/>
       <StepContent
           currentStep={currentStep}
           setCurrentStep={setCurrentStep}
@@ -46,6 +52,8 @@ function UploadDocs() {
       />
     <ToastContainer />
     </div>
+    </div>
+    </>
   );
 }
 

@@ -1,4 +1,4 @@
-import {fetchWithAuth} from "./fetchwithAuth";
+import {fetchWithAuth} from "./fetchWithAuth";
 
 export const uploadDocument = async (file, name, setErrors,onSuccess) => {
 

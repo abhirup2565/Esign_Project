@@ -1,0 +1,17 @@
+[
+    {
+        "title":"Upload",
+        "Content":"Manager names the file, uploads the document, and selects employees for signature requests.",
+        "icon":"FileUp"
+    },
+    {
+        "title":"Sign",
+        "Content":"Employees receive assigned documents, read the contract, and sign via Aadhaar OTP-based eSign.",
+        "icon":"PenTool"
+    },
+    {
+        "title":"Track",
+        "Content":"Managers track all uploaded documents, and employees see their assigned documents. Completed documents can be downloaded.",
+        "icon":"CheckCircle"
+    }
+]

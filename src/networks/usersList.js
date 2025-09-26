@@ -1,4 +1,4 @@
-import {fetchWithAuth} from "./fetchwithAuth";
+import {fetchWithAuth} from "./fetchWithAuth";
 
 export const userList = async (setErrors) => {
 
@@ -12,7 +12,6 @@ export const userList = async (setErrors) => {
       throw new Error(`HTTP error! status: ${resp.status}`);
     }
     const data = await resp.json();
-    console.log(`Users List Fetched`);
     setErrors([]);  // Clear errors on success
     return data;
   } catch (error) {

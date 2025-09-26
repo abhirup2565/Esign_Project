@@ -1,0 +1,23 @@
+[
+    {
+        "title":"Manager Dashboard",
+        "icon":"LayoutDashboard"
+    },
+    {
+        "title":"Employee Signing",
+        "icon":"PenLine"
+    },
+    {
+        "title":"Status Tracking",
+        "icon":"BarChart3"
+    },
+    {
+        "title":"Employee Creation",
+        "icon":"UserPlus"
+    },
+    {
+        "title":"Secure &amp; Compliant",
+        "icon":"ShieldCheck"
+    }
+    
+]
