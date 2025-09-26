@@ -1,20 +1,18 @@
-import {fetchWithAuth} from "./fetchwithAuth";
+import {fetchWithAuth} from "./fetchWithAuth";
 
-export const statusList = async (setErrors) => {
+export const signatureList = async (url,setErrors) => {
 
   const requestOptions = {
     method: "GET",
   };
 
   try {
-    const resp = await fetchWithAuth(`status/`, requestOptions);
+    const resp = await fetchWithAuth(url, requestOptions);
     if (!resp.ok) {
       throw new Error(`HTTP error! status: ${resp.status}`);
     }
     const data = await resp.json();
-    console.log(`Users List Fetched`);
     setErrors([]);  // Clear errors on success
-    console.log(`Users List Fetched :${JSON.stringify(data)}`);
     return data;
   } catch (error) {
     console.error("An error occurred:", error);

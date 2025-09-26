@@ -1,15 +1,8 @@
 import { useState, useEffect } from "react";
-//import { useAppContext } from "../wrappers/AppContext";
-import { handleRefresh} from "../utils/handleRefresh";
-import { toast, ToastContainer } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
-import handleDownload from "../networks/handleDownload";
 import StatusIndicator from "../components/StatusIndicator";
 import { FileText } from "lucide-react";
-import { FaDownload, FaLink } from "react-icons/fa";
-import "../styles/Status.css"
 import Error from "../components/Error";
-import { statusList } from "../networks/statusList";
+import { signatureList } from "../networks/signatureList";
 import { DataTable } from "../components/data-table";
 
 const Status = () => {
@@ -19,7 +12,7 @@ const Status = () => {
   useEffect(() => {
   const fetchData = async () => {
     try {
-      const data = await statusList(setErrors);
+      const data = await signatureList("status/",setErrors);
       setSignatures(data);
     } catch (error) {
       console.error("Error fetching users:", error);
@@ -35,11 +28,12 @@ const Status = () => {
 
   return (
     <div>
-      <h2 className="status-heading">Status Page</h2>
+      <h2 className="text-2xl font-bold text-primary mb-6 md:text-3xl">
+        Status Page
+      </h2>
       <Error errors={errors}/>
       <StatusIndicator signatures={signatures}/>
       {signatures.length>0?(<DataTable data={signatures}/>):<EmptyTable/>}
-      <ToastContainer />
     </div>
   );
 };

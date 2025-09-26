@@ -1,9 +1,9 @@
-import { BASE_URL } from "../constants/network";
+import { fetchWithAuth } from "./fetchWithAuth";
 
 export default async function LoginRequest(username, password,setError,login)
 {
      try {
-      const res = await fetch(`${BASE_URL}token/`, {
+      const res = await fetchWithAuth(`token/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

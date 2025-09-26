@@ -1,4 +1,3 @@
-import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Badge } from "../components/ui/badge";
 import {
@@ -11,12 +10,11 @@ import {
 } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import CreateSignatureButton from "./CreateSignatureButton";
-import "../styles/UploadDocs.css";
-import Error from "../components/Error";
 import { userList } from "../networks/usersList";
 import { useEffect, useState } from "react";
 import { Checkbox } from "./ui/checkbox";
 import { ScrollArea } from "./ui/scroll-area";
+import { Input } from "./ui/input";
 
 const StepContent = ({
   currentStep,
@@ -25,7 +23,6 @@ const StepContent = ({
   setFile,
   setName,
   handleUploadSubmit,
-  errors,
   setErrors,
   uploadedDocId,
   selectedUsers,
@@ -38,7 +35,6 @@ const StepContent = ({
    const fetch = async () => {
     try {
       const data = await userList(setErrors);
-      console.log(data);
       setUsers(data);
     } catch (error) {
       console.error("Error fetching users:", error);
@@ -52,20 +48,18 @@ const StepContent = ({
       case 1: 
         return (
               <Card>
+                <CardHeader>
+                    <CardTitle>Step 1: Upload Document</CardTitle>
+                </CardHeader>
                 <CardContent>
             <form onSubmit={handleUploadSubmit}>
           <div className="flex flex-col gap-6">
           <div className="grid gap-3">
             <Label className="login-label">File Name</Label>
-            <input
+            <Input
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className={cn(
-                      "file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 border-input h-9 w-full min-w-0 rounded-md border bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
-                      "focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]",
-                      "aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
-                    )}
               placeholder="File Name"
               required
             />
@@ -74,14 +68,9 @@ const StepContent = ({
             <div className="flex items-center">
                   <Label htmlFor="file">Choose File:</Label>
             </div>
-            <input
+            <Input
               type="file"
               onChange={(e) => setFile(e.target.files[0])}
-              className={cn(
-                      "file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 border-input h-9 w-full min-w-0 rounded-md border bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
-                      "focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]",
-                      "aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
-                    )}
               required
             />
           </div>
@@ -93,7 +82,6 @@ const StepContent = ({
           </div>
         </form>
         </CardContent>
-        <Error errors={errors}/>
         </Card>
 );
 
@@ -108,9 +96,6 @@ const StepContent = ({
       </CardHeader>
 
       <CardContent className="flex flex-row gap-6">
-        {/* Errors */}
-        <Error errors={errors} />
-
         {/* Selected Users */}
         <div className="w-[50%]">
           <Label className="mb-2 block font-medium">Selected Users</Label>
@@ -192,65 +177,6 @@ const StepContent = ({
           />
       </CardFooter>
     </Card>
-          // <div className="step-content">
-          //     <p><strong>Uploaded Document ID:</strong> {uploadedDocId}</p>
-          //     <div className="step2-flex-container">
-
-          //       {/* Selected Users */}
-          //       <div className="selected-users">
-          //         <Error errors={errors}/>
-          //         <strong>Selected Users:</strong>
-          //         <div className="selected-users-list">
-          //           {selectedUsers.map((user) => (
-          //             <span key={user.identifier} className="selected-user-item">
-          //               {user.displayName}
-          //             </span>
-          //           ))}
-          //         </div>
-          //       </div>
-
-          //         {/* Scrollable Users List */}
-          //         <div>
-          //           <strong>Select Users to Send Signature Request:</strong>
-          //           <div className="users-list-container">
-          //             <ul className="users-list">
-          //               {users.map((user) => (
-          //                 <li key={user.identifier} className="user-item">
-          //                   <label className="user-label">
-          //                     <input
-          //                       type="checkbox"
-          //                       value={user.identifier}
-          //                       checked={selectedUsers.some(u => u.identifier === user.identifier)}
-          //                       onChange={(e) => {
-          //                         if (e.target.checked) {
-          //                           setSelectedUsers((prev) => [
-          //                             ...prev,
-          //                             { identifier: user.identifier, displayName: user.displayName,birthYear: user.birthYear}
-          //                           ]);
-          //                         } else {
-          //                           setSelectedUsers((prev) =>
-          //                             prev.filter((u) => u.identifier !== user.identifier)
-          //                           );
-          //                         }
-          //                       }}
-          //                     />
-          //                     <span className="user-name">{user.displayName} (Id:{user.identifier})</span>
-          //                   </label>
-          //                 </li>
-          //               ))}
-          //             </ul>
-          //           </div>
-          //         </div>
-          //     </div>
-
-          //     {/* Button to create signatures */}
-          //     <CreateSignatureButton
-          //       uploadedDocId={uploadedDocId}
-          //       selectedUsers={selectedUsers}
-          //       setErrors={setErrors}
-          //       setCurrentStep={setCurrentStep}
-          //     />
-          // </div>
     );
     
     case 3:

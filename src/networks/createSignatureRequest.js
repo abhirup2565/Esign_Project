@@ -1,4 +1,4 @@
-import { fetchWithAuth } from "./fetchwithAuth";
+import { fetchWithAuth } from "./fetchWithAuth";
 
 const createSignatureRequest = async (documentId, selectedUsers, setErrors, onSuccess) => {
 
@@ -33,7 +33,6 @@ const createSignatureRequest = async (documentId, selectedUsers, setErrors, onSu
 
   try {
     const resp = await fetchWithAuth(`signature/`, requestOptions);
-    console.log("Sending payload:", raw);
     if (!resp.ok) {
       throw new Error(`HTTP error! status: ${resp.status}`);
     }

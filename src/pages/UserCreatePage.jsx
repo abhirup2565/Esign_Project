@@ -9,12 +9,12 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { Label } from "@/components/ui/label"
-import { useAppContext } from "../wrappers/AppContext";
 import { toast, ToastContainer } from "react-toastify";
-import { BASE_URL } from "../constants/network";
+import { Input } from "../components/ui/input";
+import { Checkbox } from "../components/ui/checkbox";
+import { fetchWithAuth } from "../networks/fetchwithAuth";
 
 export default function UserCreatePage() {
-  const { access } = useAppContext(); // access token from context/localStorage
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [dob, setDob] = useState(""); // Date of Birth
@@ -22,14 +22,11 @@ export default function UserCreatePage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setMessage("");
 
-    try {
-      const res = await fetch(`${BASE_URL}users/create/`, {
+    const options = {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${access}`, // JWT token
         },
         body: JSON.stringify({
           "username":username,
@@ -37,7 +34,9 @@ export default function UserCreatePage() {
           "dob": dob,
           "is_staff": isManager,
         }),
-      });
+      }
+    try {
+      const res = await fetchWithAuth(`users/create/`, options);
 
       if (res.ok) {
         toast.success("User created successfully!");
@@ -71,15 +70,10 @@ export default function UserCreatePage() {
           <div className="flex flex-col gap-6">
           <div className="grid gap-3">
             <Label className="login-label">Username</Label>
-            <input
+            <Input
               type="text"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              className={cn(
-                      "file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 border-input h-9 w-full min-w-0 rounded-md border bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
-                      "focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]",
-                      "aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
-                    )}
               placeholder="Enter your username"
               required
             />
@@ -88,15 +82,10 @@ export default function UserCreatePage() {
             <div className="flex items-center">
                   <Label htmlFor="password">Password</Label>
             </div>
-            <input
+            <Input
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className={cn(
-                      "file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 border-input h-9 w-full min-w-0 rounded-md border bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
-                      "focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]",
-                      "aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
-                    )}
               placeholder="Enter your password"
               required
             />
@@ -105,14 +94,9 @@ export default function UserCreatePage() {
             <div className="flex items-center">
                   <Label htmlFor="dob">Date of birth</Label>
             </div>
-            <input
+            <Input
               type="date"
               value={dob}
-              className={cn(
-                      "file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 border-input h-9 w-full min-w-0 rounded-md border bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
-                      "focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]",
-                      "aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
-                    )}
               onChange={(e) => setDob(e.target.value)}
               required
             />
@@ -120,13 +104,9 @@ export default function UserCreatePage() {
           <div className="grid gap-3">
             <div className="flex items-center gap-4">
                   <Label htmlFor="isManager">Is Manager</Label>
-              <input
-                type="checkbox"
+              <Checkbox
                 checked={isManager}
-                onChange={(e) => setIsManager(e.target.checked)}
-                className={cn(
-                        "peer border-input dark:bg-input/30 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground dark:data-[state=checked]:bg-primary data-[state=checked]:border-primary focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive size-4 shrink-0 rounded-[4px] border shadow-xs transition-shadow outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50"
-                      )}
+                onCheckedChange={(checked) => setIsManager(!!checked)}
               />
               </div>
           </div>

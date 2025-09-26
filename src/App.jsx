@@ -1,5 +1,4 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
-import Navbar from "./components/Navbar";
 import Status from "./pages/Status";
 import UploadDocs from "./pages/UploadDocs";
 import Settings from "./pages/Settings";
