@@ -16,6 +16,7 @@ export const signatureList = async (url,setErrors) => {
     return data;
   } catch (error) {
     console.error("An error occurred:", error);
-    setErrors([`An error occurred: ${error}`]);
+    setErrors([error.message || "Network request failed"]);
+    return [];
   }
 };

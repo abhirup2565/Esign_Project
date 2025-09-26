@@ -19,6 +19,7 @@ const Status = () => {
       setSignatures(data);
     } catch (error) {
       console.error("Error fetching users:", error);
+      setErrors([error.message || "Something went wrong"]);
     }
     finally{
         setLoading(false);

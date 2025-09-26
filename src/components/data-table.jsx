@@ -236,6 +236,9 @@ export function DataTable({
   data: initialData,
 }) {
   const [data, setData] = React.useState(() => initialData)
+  React.useEffect(() => {
+      setData(initialData)
+    }, [initialData])
   const [rowSelection, setRowSelection] = React.useState({})
   const [columnVisibility, setColumnVisibility] =
     React.useState({})
@@ -251,7 +254,6 @@ export function DataTable({
     useSensor(TouchSensor, {}),
     useSensor(KeyboardSensor, {})
   )
-
   const dataIds = React.useMemo(
     () => data?.map(({ id }) => id) || [],
     [data]

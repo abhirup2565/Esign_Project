@@ -44,11 +44,6 @@ const ManagerItems = [
     title: "Upload",
     url: "/upload",
     icon: Upload,
-  },
-  {
-    title: "Settings",
-    url: "/settings",
-    icon: Settings,
   }
 ]
 export function AppSidebar() {

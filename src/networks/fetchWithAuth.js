@@ -4,6 +4,7 @@ import { refreshToken } from "./refreshToken";
 export async function fetchWithAuth(url, options = {}) {
   let access = localStorage.getItem("access");
 
+  try{
   // Add Authorization header
   options.headers = {
     ...options.headers,
@@ -25,4 +26,10 @@ export async function fetchWithAuth(url, options = {}) {
   }
 
   return response;
+} catch (error) {
+    console.error("fetchWithAuth error:", error);
+    // Re-throw so the caller (e.g. signatureList) can decide what to do
+    throw new Error(error.message || "Network request failed");
+  }
 }
+
