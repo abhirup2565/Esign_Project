@@ -12,7 +12,7 @@ import { Label } from "@/components/ui/label"
 import { toast, ToastContainer } from "react-toastify";
 import { Input } from "../components/ui/input";
 import { Checkbox } from "../components/ui/checkbox";
-import { fetchWithAuth } from "../networks/fetchwithAuth";
+import { fetchWithAuth } from "../networks/fetchWithAuth";
 
 export default function UserCreatePage() {
   const [username, setUsername] = useState("");
