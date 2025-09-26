@@ -30,7 +30,9 @@ function UploadDocs() {
   return (
     <div className="flex min-h-svh w-full items-center justify-center">
     <div className="w-full max-w-sm">
-    <h2 className="uploadDocs-heading">Upload Document and Create Signature</h2>
+    <h2 className="text-2xl font-semibold tracking-tight text-primary">
+        Upload Document and Create Signature
+      </h2>
      <Stepper className="stepper-container" currentStep={currentStep}/>
       <StepContent
           currentStep={currentStep}
