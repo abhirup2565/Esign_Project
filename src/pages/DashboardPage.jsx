@@ -58,7 +58,7 @@ const DashboardPage = () => {
 
 const EmptyTable = () => {
   return (
-    <div className="empty-table">
+    <div className="flex flex-col justify-center items-center">
       <FileText size={64} className="empty-icon" />
       <h3 className="empty-title">No Document Found</h3>
       <p className="empty-subtitle">You don't have any documents yet.</p>
