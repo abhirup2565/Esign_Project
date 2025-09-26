@@ -1,4 +1,4 @@
-import { fetchWithAuth } from "./fetchwithAuth";
+import { fetchWithAuth } from "./fetchWithAuth";
 
 const handleDownload = async (signatureId) => {
 

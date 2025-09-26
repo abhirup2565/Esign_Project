@@ -4,10 +4,13 @@ import { FileText } from "lucide-react";
 import Error from "../components/Error";
 import { signatureList } from "../networks/signatureList";
 import { DataTable } from "../components/data-table";
+import { ShimmerStatusIndicator } from "../components/ShimmerStatusIndicator";
+import { ShimmerDataTable } from "../components/ShimmerDataTable";
 
 const Status = () => {
   const [ signatures, setSignatures ] = useState([]);
   const [errors, setErrors] = useState([]);
+  const [loading, setLoading] = useState(true); 
 
   useEffect(() => {
   const fetchData = async () => {
@@ -17,6 +20,9 @@ const Status = () => {
     } catch (error) {
       console.error("Error fetching users:", error);
     }
+    finally{
+        setLoading(false);
+      }
   };
   // fetch immediately
   fetchData();
@@ -32,8 +38,19 @@ const Status = () => {
         Status Page
       </h2>
       <Error errors={errors}/>
+      {loading ? (
+      <>
+      <ShimmerStatusIndicator/>
+      <ShimmerDataTable/>
+      </>) : (
+      <>
       <StatusIndicator signatures={signatures}/>
-      {signatures.length>0?(<DataTable data={signatures}/>):<EmptyTable/>}
+      {signatures.length > 0 ? (
+        <DataTable data={signatures}/>
+      ) : (
+        <EmptyTable/>
+      )}
+    </>)}
     </div>
   );
 };

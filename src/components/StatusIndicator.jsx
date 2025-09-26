@@ -1,7 +1,5 @@
 import {
   Card,
-  CardAction,
-  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
