@@ -14,6 +14,7 @@ import { useAppContext } from "../wrappers/AppContext";
 import LoginRequest from "../networks/LoginRequest";
 import { Input } from "../components/ui/input";
 import Error from "../components/Error";
+import { Loader2 } from "lucide-react";
 
 
 
@@ -22,13 +23,16 @@ export default function LoginPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState([]);
+  const [loading, setLoading] = useState(false); 
   const navigate = useNavigate();
   
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError([]);
+    setLoading(true);
     const success = await LoginRequest(username, password, setError,login);
+    setLoading(false);
     if(success)
     {
       navigate("/dashboard")
@@ -72,8 +76,8 @@ export default function LoginPage() {
             />
           </div>
           <div className="flex flex-col gap-3">
-                <Button type="submit" className="w-full">
-                  Login
+                <Button type="submit" className="w-full" disabled={loading}>
+                  {loading ? (<><Loader2 className="h-4 w-4 animate-spin" />Logging in...</>) : ("Login")}
                 </Button>
           </div>
           </div>
