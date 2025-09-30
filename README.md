@@ -31,9 +31,27 @@ The SignFlow Frontend delivers a user-friendly experience tailored to two roles:
 
 - Download completed signed documents
 
-✨ Signature Status Polling<br>
-The frontend automatically polls the backend to fetch updated signature statuses.
-This ensures that Managers and Employees always see real-time updates for signing workflows without needing to refresh manually.
+✨ Key Frontend Features
+
+- Role-based UI → Separate dashboards and access for Managers and Employees.
+
+- Automatic Signature Status Polling → Continuously fetches the latest document/signature status from the backend, ensuring real-time updates.
+
+- Hot Reloading → Development mode includes instant browser refresh on code changes.
+
+- Shimmer Loading States → Dashboard and status views use loading skeletons for a smoother user experience.
+
+- Status Indicators → Visual counters for Signed, Unsigned, and Total documents so users can quickly track progress.
+
+- Responsive Design → Fully optimized for desktop and mobile devices.
+
+- Reusable Components → Built with TailwindCSS + ShadCN for a consistent UI across the app.
+
+- Success Toast Notifications → Users see toast messages on successful actions (e.g., document upload, user creation, signature completion).
+
+- Error Handling & Alerts → User-friendly error messages for failed API calls or invalid inputs.
+
+- Secure API Communication → All requests routed through the backend’s JWT-based authentication.
 
 ## ⚙️ Tech Stack
 
@@ -84,12 +102,12 @@ Change the BASE_URL in src/costants/network.js<br>
 By default set to localhost:8000 
 
 ``` bash
-BASE_URL=http://localhost:8000/api
+BASE_URL=http://localhost:8000/api/
 ```
 
 For production builds, replace with your deployed backend URL:
 
-BASE_URL=https://your-backend-url/api
+BASE_URL=https://your-backend-url/api/
 
 ### 4. Run the app locally
 
@@ -115,9 +133,10 @@ The frontend relies on the backend for all major operations:
 
 **Make sure the backend is running and accessible via the REACT_APP_API_BASE_URL.**
 
-### 🖼️ Screenshots (Optional)
+### 🖼️ Screenshots
+While the images showcase Light mode, users can switch between Light and Dark modes seamlessly.
 
-You can include a few screenshots here for clarity:
+Home Page(Light/Dark) 
 
 Login Page
 
@@ -126,6 +145,8 @@ Manager Status
 Employee/Manager Dashboard
 
 Document Signing Workflow
+
+User Creation Page
 
 ![Login Page](./screenshots/login.png)
 ![Manager Dashboard](./screenshots/dashboard.png)
