@@ -133,24 +133,5 @@ The frontend relies on the backend for all major operations:
 
 **Make sure the backend is running and accessible via the REACT_APP_API_BASE_URL.**
 
-### 🖼️ Screenshots
-While the images showcase Light mode, users can switch between Light and Dark modes seamlessly.
-
-Home Page(Light/Dark) 
-
-Login Page
-
-Manager Status 
-
-Employee/Manager Dashboard
-
-Document Signing Workflow
-
-User Creation Page
-
-![Login Page](./screenshots/login.png)
-![Manager Dashboard](./screenshots/dashboard.png)
-![Document Signing](./screenshots/signing.png)
-
 ## 🔗 Related Repositories
 SignFlow Backend Repository: [SignFlow Backend (Django)](https://github.com/abhirup2565/Esign_Project-Backend.git)

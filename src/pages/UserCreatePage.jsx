@@ -46,7 +46,7 @@ export default function UserCreatePage() {
         setIsManager(false);
       } else {
         const data = await res.json();
-        toast.error(data.detail || "Failed to create user.");
+        toast.error(data.detail || JSON.stringify(data.username) || "Failed to create user.");
       }
     } catch (err) {
       console.error(err);
